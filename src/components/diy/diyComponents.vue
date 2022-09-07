@@ -13,7 +13,7 @@
           <template #item="{element}">
             <div
                 class="list-group-item"
-                @click="addDom(element, 1)"
+                @click="addDom(element)"
             >
               <div>
                 <p>{{ element.name }}</p>
@@ -29,6 +29,7 @@
 import {reactive, toRefs,onMounted} from "vue";
 import draggable from "vuedraggable";
 // import mPage from "@/components/mobilePageDiy/index.js"
+import bus from '@/ulits/bus.ts'
   export default {
     name:'DiyComponents',
     components:{
@@ -62,13 +63,16 @@ import draggable from "vuedraggable";
         leftMenu.forEach(i=>{
           i.list.push({
             name:'轮播图',
-            imgUrl:'',
+            id:5,
+            imgUrl:''
           },{
             name:'图片魔方',
+            id:6,
             imgUrl:'',
           },{
             name:'商品',
             imgUrl:'',
+            id:7,
           },)
         })
         state.leftMenu = leftMenu
@@ -81,8 +85,11 @@ import draggable from "vuedraggable";
         };
       }
 
-      const addDom =()=>{
+      const addDom =(el)=>{
         // 增加节点方法
+        const id = new Date().getTime()
+        el.id=id
+        bus.emit('addDom', JSON.parse(JSON.stringify(el)))
       }
 
       onMounted(()=>{
