@@ -90,6 +90,7 @@ import bus from '@/ulits/bus.ts'
         const id = new Date().getTime()
         el.id=id
         bus.emit('addDom', JSON.parse(JSON.stringify(el)))
+        bus.emit('chooseComponents', JSON.parse(JSON.stringify(el)))
       }
 
       onMounted(()=>{

@@ -8,7 +8,7 @@
         item-key="id"
     >
       <template #item="{ element,index }">
-        <div class="list-group-item">
+        <div class="list-group-item" :class="{'choose-item':currentIndex === index}" @click="chooseItem(element,index)">
           <div class="delete-box" v-if="index ===currentIndex">
             <div class="icon-copy" @click="copyItem(index)">cp</div>
             <div class="icon-del" @click="deleteItem(index)">dl</div>
@@ -56,8 +56,22 @@ export default {
       state.mConfig.splice(index,0,copy)
     }
 
+    const chooseItem = (el,index) =>{
+        state.currentIndex = index
+      bus.emit('chooseComponents', JSON.parse(JSON.stringify(el)))
+    }
+
     const deleteItem = (index) =>{
       state.mConfig.splice(index,1)
+      if(state.mConfig.length === 0){
+        if(state.mConfig[index]){
+          bus.emit('chooseComponents', JSON.parse(JSON.stringify(state.mConfig[index])))
+        }else{
+          bus.emit('chooseComponents', JSON.parse(JSON.stringify(state.mConfig[index-1])))
+        }
+      }else{
+        bus.emit('chooseComponents', null)
+      }
     }
 
     const moveOp = (index,type) =>{
@@ -84,6 +98,7 @@ export default {
       change,
       onMove,
       copyItem,
+      chooseItem,
       deleteItem,
       moveOp,
       log,
@@ -103,8 +118,9 @@ export default {
     height: 100%;
     .list-group-item {
       position: relative;
-      background: #2879ff;
+      background: #f0f2f5;
       margin-bottom: 2px;
+      padding: 0 10px 10px;
       cursor: move;
       .delete-box{
         position: absolute;
@@ -128,6 +144,11 @@ export default {
           border:1px solid black;
         }
       }
+    }
+    .choose-item{
+      background: red;
+      border: 2px solid #1890ff;
+      box-shadow: 0 0 10px 0 rgb(24 144 255 / 30%);
     }
   }
 }

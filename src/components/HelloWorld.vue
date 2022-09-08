@@ -10,20 +10,24 @@
     <div class="diy-view">
       <DiyView />
     </div>
-    <div class="diy-config">操作区</div>
+    <div class="diy-config">
+      <DiyOperation />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
   import DiyComponents from '@/components/diy/diyComponents.vue'
   import DiyView from '@/components/diy/diyView.vue'
+  import DiyOperation from '@/components/diy/diyOperation.vue'
   import {reactive, toRefs} from "vue";
 
   export default {
    name:'Diy',
     components:{
       DiyComponents,
-      DiyView
+      DiyView,
+      DiyOperation
     },
    props:{
      // msg:{
