@@ -63,14 +63,17 @@ import bus from '@/ulits/bus.ts'
         leftMenu.forEach(i=>{
           i.list.push({
             name:'轮播图',
+            c_name:'c_banner',
             id:5,
             imgUrl:''
           },{
             name:'图片魔方',
+            c_name:'c_imgBox',
             id:6,
             imgUrl:'',
           },{
             name:'商品',
+            c_name:'c_product',
             imgUrl:'',
             id:7,
           },)

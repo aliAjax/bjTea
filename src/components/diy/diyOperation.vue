@@ -1,14 +1,15 @@
 <template>
   <div class="diyOperation">
     <div class="title">{{data.name}}</div>
-    <div class="operation">
-      <div class="content-box">
-        <p>内容设置</p>
-      </div>
-      <div class="style-box">
-        <p>样式设置</p>
-      </div>
-    </div>
+    <component :is="data.c_name"/>
+<!--    <div class="operation">-->
+<!--      <div class="content-box">-->
+<!--        <p>内容设置</p>-->
+<!--      </div>-->
+<!--      <div class="style-box">-->
+<!--        <p>样式设置</p>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -16,12 +17,19 @@
 
 import {onMounted, reactive, toRefs} from "vue";
 import bus from "@/ulits/bus";
+import diyModules from "@/components/diyOperationComponents/index.ts"
 
 export default {
   name:'DiyOperation',
+  components:{
+    ...diyModules
+  },
   setup(){
     const state = reactive({
-      data:{}
+      data:{
+        name:'轮播图',
+        c_name:'c_banner'
+      }
     })
 
     onMounted(()=>{
