@@ -10,10 +10,10 @@
       <template #item="{ element,index }">
         <div class="list-group-item" :class="{'choose-item':currentIndex === index}" @click="chooseItem(element,index)">
           <div class="delete-box" v-if="index ===currentIndex">
-            <div class="icon-copy" @click="copyItem(index)">cp</div>
-            <div class="icon-del" @click="deleteItem(index)">dl</div>
-            <div class="icon-up" @click="moveOp(index,-1)">up</div>
-            <div class="icon-down" @click="moveOp(index,1)">dw</div>
+            <el-button class="icon-copy" @click="copyItem(index)">cp</el-button>
+            <el-button class="icon-del" @click="deleteItem(index)">dl</el-button>
+            <el-button class="icon-up" :disabled="index === 0" @click="moveOp(index,-1)">up</el-button>
+            <el-button class="icon-down" :disabled="index === mConfig.length-1" @click="moveOp(index,1)">dw</el-button>
           </div>
           {{ element.name }}
         </div>
@@ -138,6 +138,9 @@ export default {
         display: flex;
         flex-flow: column;
         justify-content: space-between;
+        :deep .el-button{
+          margin-left: unset;
+        }
         >div{
           width: 100%;
           display: inline-block;
