@@ -1,7 +1,7 @@
-import c_banner from "@/components/diyOperationComponents/c_banner.vue";
+import c_swiper from "@/components/diyOperationComponents/c_swiper.vue";
 
 const diyModules = {
-    c_banner
+    c_swiper
 }
 
 export default diyModules

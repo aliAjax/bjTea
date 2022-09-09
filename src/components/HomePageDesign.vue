@@ -20,7 +20,7 @@
   import DiyComponents from '@/components/diy/diyComponents.vue'
   import DiyView from '@/components/diy/diyView.vue'
   import DiyOperation from '@/components/diy/diyOperation.vue'
-  import {reactive, toRefs} from "vue";
+  import {onMounted, reactive, toRefs} from "vue";
 
   export default {
    name:'Diy',
@@ -29,20 +29,25 @@
       DiyView,
       DiyOperation
     },
-   props:{
-     // msg:{
-     //   type:String,
-     //   default:''
-     // }
-   },
     setup(){
       const state  = reactive({
-        tabValue:'components'
+        tabValue:'components',
+        formData:{
+          value:[]
+        }
       })
 
       const handleClick = () =>{
         // api need
       }
+
+      const initData = () =>{
+
+      }
+
+      onMounted(()=>{
+        initData()
+      })
 
       return {
         handleClick,

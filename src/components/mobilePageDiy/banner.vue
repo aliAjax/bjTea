@@ -84,7 +84,7 @@ export default {
   cname: "轮播图", // 标题名称
   icon: "icontupianguanggao1",
   defaultName: "swiperBg", // 外面匹配名称
-  configName: "c_banner", // 右侧配置名称
+  configName: "c_swiper", // 右侧配置名称
   type: 0, // 0 基础组件 1 营销组件 2工具组件
   props: {
     index: {

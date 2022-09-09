@@ -1,5 +1,5 @@
 <template>
-  <div class="c_banner">
+  <div class="c_swiper">
     <div class="content">
       <p>内容设置</p>
       <div></div>
@@ -17,7 +17,7 @@
 import {reactive, toRefs} from "vue";
 
     export default {
-      name:'c_banner',
+      name:'c_swiper',
       setup(){
         const state = reactive({
           color1:'#409EFF'
@@ -31,7 +31,7 @@ import {reactive, toRefs} from "vue";
 </script>
 
 <style scoped lang="scss">
-    .c_banner{
+    .c_swiper{
       .content{
 
       }

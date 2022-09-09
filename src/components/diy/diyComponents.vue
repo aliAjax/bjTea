@@ -28,8 +28,8 @@
 <script lang="ts">
 import {reactive, toRefs,onMounted} from "vue";
 import draggable from "vuedraggable";
-// import mPage from "@/components/mobilePageDiy/index.js"
 import bus from '@/ulits/bus.ts'
+import diyDefaultData from '@/ulits/diyData/index'
   export default {
     name:'DiyComponents',
     components:{
@@ -39,7 +39,8 @@ import bus from '@/ulits/bus.ts'
       const state=reactive({
         data:[],
         leftMenu:[],
-        activeNames:[0,1,2]
+        activeNames:[0,1,2],
+        diyDefaultData
       })
 
       const initData = () =>{
@@ -63,7 +64,7 @@ import bus from '@/ulits/bus.ts'
         leftMenu.forEach(i=>{
           i.list.push({
             name:'轮播图',
-            c_name:'c_banner',
+            c_name:'c_swiper',
             id:5,
             imgUrl:''
           },{
@@ -90,10 +91,11 @@ import bus from '@/ulits/bus.ts'
 
       const addDom =(el)=>{
         // 增加节点方法
-        const id = new Date().getTime()
-        el.id=id
-        bus.emit('addDom', JSON.parse(JSON.stringify(el)))
-        bus.emit('chooseComponents', JSON.parse(JSON.stringify(el)))
+        const id = "id"+ new Date().getTime()
+        const tmp = JSON.parse(JSON.stringify(state.diyDefaultData[el.c_name]))
+        tmp.id=id
+        bus.emit('addDom', tmp)
+        bus.emit('chooseComponents', tmp)
       }
 
       onMounted(()=>{

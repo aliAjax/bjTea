@@ -28,7 +28,7 @@ export default {
     const state = reactive({
       data:{
         name:'轮播图',
-        c_name:'c_banner'
+        c_name:'c_swiper'
       }
     })
 

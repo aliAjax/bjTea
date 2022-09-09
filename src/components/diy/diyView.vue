@@ -63,7 +63,7 @@ export default {
 
     const deleteItem = (index) =>{
       state.mConfig.splice(index,1)
-      if(state.mConfig.length === 0){
+      if(state.mConfig.length !== 0){
         if(state.mConfig[index]){
           bus.emit('chooseComponents', JSON.parse(JSON.stringify(state.mConfig[index])))
         }else{
