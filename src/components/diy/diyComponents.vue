@@ -16,7 +16,7 @@
                 @click="addDom(element)"
             >
               <div>
-                <p>{{ element.name }}</p>
+                <p>{{ element.cnName }}</p>
               </div>
             </div>
           </template>
@@ -63,18 +63,18 @@ import diyDefaultData from '@/ulits/diyData/index'
         ]
         leftMenu.forEach(i=>{
           i.list.push({
-            name:'轮播图',
-            c_name:'c_swiper',
+            cnName:'轮播图',
+            name:'c_swiper',
             id:5,
             imgUrl:''
           },{
-            name:'图片魔方',
-            c_name:'c_imgBox',
+            cnName:'图片魔方',
+            name:'c_imgBox',
             id:6,
             imgUrl:'',
           },{
-            name:'商品',
-            c_name:'c_product',
+            cnName:'商品',
+            name:'c_product',
             imgUrl:'',
             id:7,
           },)
@@ -92,7 +92,7 @@ import diyDefaultData from '@/ulits/diyData/index'
       const addDom =(el)=>{
         // 增加节点方法
         const id = "id"+ new Date().getTime()
-        const tmp = JSON.parse(JSON.stringify(state.diyDefaultData[el.c_name]))
+        const tmp = JSON.parse(JSON.stringify(state.diyDefaultData[el.name]))
         tmp.id=id
         emit('addDom', tmp)
         bus.emit('addDom', tmp)

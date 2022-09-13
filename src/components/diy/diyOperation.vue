@@ -1,7 +1,7 @@
 <template>
   <div class="diyOperation">
-    <div class="title">{{data.name}}</div>
-    <component :is="data.c_name"/>
+    <div class="title">{{data.cnName}}</div>
+    <component :is="data.name"/>
 <!--    <div class="operation">-->
 <!--      <div class="content-box">-->
 <!--        <p>内容设置</p>-->
@@ -27,14 +27,13 @@ export default {
   setup(){
     const state = reactive({
       data:{
-        name:'轮播图',
-        c_name:'c_swiper'
+        name:'c_swiper',
+        cnName:'轮播图'
       }
     })
 
     onMounted(()=>{
       bus.on('chooseComponents', e => {
-        console.log('e', e)
         state.data = e
       })
     })
