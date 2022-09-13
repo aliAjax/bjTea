@@ -1,15 +1,10 @@
 <template>
   <div class="diyOperation">
-    <div class="title">{{data.cnName}}</div>
+    <div class="title">
+      <diyDivider />
+      <div class="title-name">{{data.cnName}}</div>
+    </div>
     <component :is="data.name"/>
-<!--    <div class="operation">-->
-<!--      <div class="content-box">-->
-<!--        <p>内容设置</p>-->
-<!--      </div>-->
-<!--      <div class="style-box">-->
-<!--        <p>样式设置</p>-->
-<!--      </div>-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -17,11 +12,13 @@
 
 import {onMounted, reactive, toRefs} from "vue";
 import bus from "@/ulits/bus";
+import diyDivider from "@/components/diy/diyDivider.vue"
 import diyModules from "@/components/diyOperationComponents/index.ts"
 
 export default {
   name:'DiyOperation',
   components:{
+    diyDivider,
     ...diyModules
   },
   setup(){
@@ -48,6 +45,17 @@ export default {
 
 <style scoped lang="scss">
 .diyOperation{
-
+  padding: 0 10px;
+  .title{
+    font-weight: bold;
+    font-size: 16px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    &-name{
+      display: inline-block;
+      margin-left: 8px;
+    }
+  }
 }
 </style>
