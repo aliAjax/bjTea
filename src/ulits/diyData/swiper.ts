@@ -1,5 +1,6 @@
 const defaultSwiperData = {
     name:'c_swiper',
+    cnName:'轮播图',
     imgConfig:{
         cname: "docStyle",
         title: "轮播图样式",

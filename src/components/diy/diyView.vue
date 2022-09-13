@@ -15,7 +15,7 @@
             <el-button class="icon-up" :disabled="index === 0" @click="moveOp(index,-1)">up</el-button>
             <el-button class="icon-down" :disabled="index === mConfig.length-1" @click="moveOp(index,1)">dw</el-button>
           </div>
-          {{ element.name }}
+          {{ element.cnName }}
         </div>
       </template>
     </draggable>
@@ -32,14 +32,10 @@ export default {
   components:{
     draggable
   },
-  setup(){
+  props:["viewData"],
+  setup(props,{emit}){
     const state = reactive({
-      mConfig:[
-        { name: "dog 1", id: 1 },
-        { name: "dog 2", id: 2 },
-        { name: "dog 3", id: 3 },
-        { name: "dog 4", id: 4 }
-      ],
+      mConfig:JSON.parse(JSON.stringify(props.viewData)),
       currentIndex:0
     })
 
@@ -51,9 +47,14 @@ export default {
 
     }
 
+    const cbParent = () =>{
+      emit('changeView',JSON.parse(JSON.stringify(state.mConfig)))
+    }
+
     const copyItem = (index) =>{
       const copy = JSON.parse(JSON.stringify(state.mConfig[index]))
       state.mConfig.splice(index,0,copy)
+      cbParent()
     }
 
     const chooseItem = (el,index) =>{
@@ -72,6 +73,7 @@ export default {
       }else{
         bus.emit('chooseComponents', null)
       }
+      cbParent()
     }
 
     const moveOp = (index,type) =>{
@@ -80,6 +82,7 @@ export default {
       mConfig.splice(index+type,0,item[0])
       state.mConfig = mConfig
       state.currentIndex += type
+      cbParent()
     }
 
     const log = (evt) => {
@@ -88,7 +91,6 @@ export default {
 
     onMounted(()=>{
       bus.on('addDom', e => {
-        console.log('e', e)
         state.currentIndex = state.mConfig.length
         state.mConfig.push(e)
       })

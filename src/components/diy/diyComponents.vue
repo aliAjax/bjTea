@@ -35,7 +35,7 @@ import diyDefaultData from '@/ulits/diyData/index'
     components:{
       draggable
     },
-    setup(){
+    setup(props,{emit}){
       const state=reactive({
         data:[],
         leftMenu:[],
@@ -94,6 +94,7 @@ import diyDefaultData from '@/ulits/diyData/index'
         const id = "id"+ new Date().getTime()
         const tmp = JSON.parse(JSON.stringify(state.diyDefaultData[el.c_name]))
         tmp.id=id
+        emit('addDom', tmp)
         bus.emit('addDom', tmp)
         bus.emit('chooseComponents', tmp)
       }

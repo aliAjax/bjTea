@@ -3,15 +3,15 @@
     <div class="diy-components">
       <el-tabs v-model="tabValue" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="组件库" name="components">
-          <DiyComponents />
+          <DiyComponents @addDom="addDom"/>
         </el-tab-pane>
       </el-tabs>
     </div>
     <div class="diy-view">
-      <DiyView />
+      <DiyView :viewData="formData.value" @changeView="changeView"/>
     </div>
     <div class="diy-config">
-      <DiyOperation />
+      <DiyOperation :operationData="formData.value[currentIndex]"/>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@
     setup(){
       const state  = reactive({
         tabValue:'components',
+        currentIndex:0,
         formData:{
           value:[]
         }
@@ -42,7 +43,15 @@
       }
 
       const initData = () =>{
+        // 请求数据
+      }
 
+      const addDom = (el:any) =>{
+        state.formData.value.push(el)
+      }
+
+      const changeView = (el:any) =>{
+        state.formData.value.push(el)
       }
 
       onMounted(()=>{
@@ -51,6 +60,8 @@
 
       return {
         handleClick,
+        addDom,
+        changeView,
         ...toRefs(state)
       }
     }
