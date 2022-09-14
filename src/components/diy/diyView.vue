@@ -137,7 +137,6 @@ export default {
       }
     }
     .choose-item{
-      background: red;
       border: 2px solid #1890ff;
       box-shadow: 0 0 10px 0 rgb(24 144 255 / 30%);
     }

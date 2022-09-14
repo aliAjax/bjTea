@@ -17,7 +17,9 @@
           >
             <template #item="{ element, index }">
               <div class="list-group-item">
-                <div class="handle"></div>
+                <div class="handle">
+                  <img src="@/assets/diy/c_swiper/move.png" alt="">
+                </div>
                 <div class="operation">
                   <el-upload
                       class="avatar-uploader"
@@ -140,19 +142,19 @@ import type { UploadProps } from 'element-plus'
         }
 
         const addInfo = () =>{
-          formData.list.push({
+          formData.value.swiperConfig.list.push({
             img: "",
             info: [
               {
                 key:"title"+Date.now(),
-                title: "标题",
+                title: "图片标题",
                 value: "",
                 tips: "请输入首页名称",
                 max: 12
               },
               {
                 key:"link"+Date.now(),
-                title: "链接",
+                title: "图片链接",
                 value: "",
                 tips: "请选择链接",
                 max: 100
@@ -197,12 +199,13 @@ import type { UploadProps } from 'element-plus'
           display: flex;
           //margin-bottom: 28px;
           .handle{
-            width: 20px;
-            height: 20px;
-            background: red;
             display: inline-block;
-            margin:0 10px;
+            margin:30px 10px 0px;
             cursor: move;
+            img{
+              width: 24px;
+              height: 24px;
+            }
           }
           .operation{
             width: 360px;
