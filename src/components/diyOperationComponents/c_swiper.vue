@@ -63,9 +63,9 @@
         </el-tab-pane>
         <el-tab-pane label="样式设置" name="styleBox">
           <el-form-item  :label="formData.imgConfig.title" label-width="110px">
-            <el-radio-group v-model="formData.imgConfig.type" class="ml-4">
-              <el-radio v-for="(item,index) in formData.imgConfig.list" :label="index" size="large">{{item.text}}</el-radio>
-            </el-radio-group>
+            <img @click="changeImgConfig(0)" src="@/assets/diy/c_swiper/fillet.png" alt="fillet" style="width: 24px;margin-right: 8px;cursor: pointer">
+            <img @click="changeImgConfig(1)" src="@/assets/diy/c_swiper/right_angle.png" alt="right_angle" style="width: 24px;cursor: pointer;margin-right: 28px;">
+            <span style="color:#333333">{{formData.imgConfig.type===0?'圆角':'直角'}}</span>
           </el-form-item>
           <el-form-item  :label="formData.docConfig.title" label-width="110px">
             <el-radio-group v-model="formData.docConfig.type" class="ml-4">
@@ -168,6 +168,10 @@ import type { UploadProps } from 'element-plus'
           })
         }
 
+        const changeImgConfig = (val) =>{
+          formData.value.imgConfig.type = val
+        }
+
         onMounted(()=>{
           console.log(props.formData)
         })
@@ -179,6 +183,7 @@ import type { UploadProps } from 'element-plus'
           handleAvatarSuccess,
           beforeAvatarUpload,
           handleClick,
+          changeImgConfig,
           ...toRefs(state)
         }
       }

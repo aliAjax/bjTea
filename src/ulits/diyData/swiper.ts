@@ -7,12 +7,12 @@ const defaultSwiperData = {
         type: 0,
         list: [
             {
-                text: "圆角",
-                icon: "iconPic_fillet"
+                text: "直角",
+                icon: "square"
             },
             {
-                text: "直角",
-                icon: "iconPic_square"
+                text: "圆角",
+                icon: "fillet"
             }
         ]
     },
