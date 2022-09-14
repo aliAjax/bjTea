@@ -84,7 +84,7 @@
     justify-content: center;
   }
   &-config{
-    width: 400px;
+    width: 440px;
     background: #ffffff;
   }
 }

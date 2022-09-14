@@ -3,8 +3,8 @@ const defaultSwiperData = {
     cnName:'轮播图',
     imgConfig:{
         cname: "docStyle",
-        title: "轮播图样式",
-        type: 1,
+        title: "边框形状：",
+        type: 0,
         list: [
             {
                 text: "圆角",
@@ -18,7 +18,7 @@ const defaultSwiperData = {
     },
     docConfig: {
         cname: "swiper",
-        title: "指示器样式",
+        title: "指示器样式：",
         type: 0,
         list: [
             {
@@ -30,14 +30,14 @@ const defaultSwiperData = {
                 icon: "iconSquarepoint"
             },
             {
-                text: "无指示器",
+                text: "无",
                 icon: "iconjinyong"
             }
         ]
     },
     txtStyle: {
-        title: "指示器位置",
-        type: "center",
+        title: "指示器位置：",
+        type: "left",
         list: [
             {
                 text: "居左",
@@ -54,31 +54,31 @@ const defaultSwiperData = {
         ]
     },
     dotColor: {
-        title: "指示器颜色",
+        title: "指示器颜色：",
         default: [
             {
-                item: "#fff"
+                item: "#999999"
             }
         ],
         color: [
             {
-                item: "#fff"
+                item: "#999999"
             }
         ]
     },
     bgColor:{
         color:[{item: "#fff"}],
         default:[{item: "#fff"}],
-        title:'背景颜色'
+        title:'背景颜色：'
     },
     lrConfig: {
-        title: "左右边距",
-        val: 10,
+        title: "图片高度：",
+        val: 0,
         min: 0,
         max:100
     },
     mbConfig: {
-        title: "页面间距",
+        title: "页面间距：",
         val: 0,
         min: 0,
         max:100
@@ -91,19 +91,22 @@ const defaultSwiperData = {
                 img: "",
                 info: [
                     {
-                        title: "标题",
+                        key:"title",
+                        title: "图片标题：",
                         value: "",
                         tips: "请输入首页名称",
                         max: 12
                     },
                     {
-                        title: "链接",
+                        key:"link",
+                        title: "图片链接：",
                         value: "",
                         tips: "请选择链接",
                         max: 100
                     },
                     {
-                        title:'生效时间',
+                        key:"time",
+                        title:'生效时间：',
                         value:[],
                     }
                 ]

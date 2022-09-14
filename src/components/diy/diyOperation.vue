@@ -4,7 +4,7 @@
       <diyDivider />
       <div class="title-name">{{data.cnName}}</div>
     </div>
-    <component :is="data.name"/>
+    <component :is="data.name" :formData="data"/>
   </div>
 </template>
 
@@ -24,8 +24,6 @@ export default {
   setup(){
     const state = reactive({
       data:{
-        name:'c_swiper',
-        cnName:'轮播图'
       }
     })
 
