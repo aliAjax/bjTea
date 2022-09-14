@@ -10,7 +10,7 @@
         <el-tab-pane label="内容设置" name="content">
           <draggable
               tag="ul"
-              :list="data.swiperConfig.list"
+              :list="formData.swiperConfig.list"
               class="list-group"
               handle=".handle"
               item-key="name"
@@ -27,7 +27,7 @@
                       :before-upload="beforeAvatarUpload"
                   >
                     <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                    <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+                    <el-icon v-else class="avatar-uploader-icon">+</el-icon>
                   </el-upload>
                   <el-form-item
                       style="margin-top: 12px;"
@@ -60,32 +60,32 @@
           <p><span @click="addInfo">+ 添加图片</span></p>
         </el-tab-pane>
         <el-tab-pane label="样式设置" name="styleBox">
-          <el-form-item  :label="data.imgConfig.title" label-width="110px">
-            <el-radio-group v-model="data.imgConfig.type" class="ml-4">
-              <el-radio v-for="(item,index) in data.imgConfig.list" :label="index" size="large">{{item.text}}</el-radio>
+          <el-form-item  :label="formData.imgConfig.title" label-width="110px">
+            <el-radio-group v-model="formData.imgConfig.type" class="ml-4">
+              <el-radio v-for="(item,index) in formData.imgConfig.list" :label="index" size="large">{{item.text}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item  :label="data.docConfig.title" label-width="110px">
-            <el-radio-group v-model="data.docConfig.type" class="ml-4">
-              <el-radio v-for="(item,index) in data.docConfig.list" :label="index" size="large">{{item.text}}</el-radio>
+          <el-form-item  :label="formData.docConfig.title" label-width="110px">
+            <el-radio-group v-model="formData.docConfig.type" class="ml-4">
+              <el-radio v-for="(item,index) in formData.docConfig.list" :label="index" size="large">{{item.text}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item  :label="data.txtStyle.title" label-width="110px">
-            <el-radio-group v-model="data.txtStyle.type" class="ml-4">
-              <el-radio v-for="item in data.txtStyle.list" :label="item.val" size="large">{{item.text}}</el-radio>
+          <el-form-item  :label="formData.txtStyle.title" label-width="110px">
+            <el-radio-group v-model="formData.txtStyle.type" class="ml-4">
+              <el-radio v-for="item in formData.txtStyle.list" :label="item.val" size="large">{{item.text}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item  :label="data.dotColor.title" label-width="110px">
-            <el-color-picker v-for="i in data.dotColor.color" v-model="i.item" />
+          <el-form-item  :label="formData.dotColor.title" label-width="110px">
+            <el-color-picker v-for="i in formData.dotColor.color" v-model="i.item" />
           </el-form-item>
-          <el-form-item  :label="data.bgColor.title" label-width="110px">
-            <el-color-picker v-for="i in data.bgColor.color" v-model="i.item" />
+          <el-form-item  :label="formData.bgColor.title" label-width="110px">
+            <el-color-picker v-for="i in formData.bgColor.color" v-model="i.item" />
           </el-form-item>
-          <el-form-item  :label="data.lrConfig.title" label-width="110px">
-            <el-slider v-model="data.lrConfig.val" show-input />
+          <el-form-item  :label="formData.lrConfig.title" label-width="110px">
+            <el-slider v-model="formData.lrConfig.val" show-input />
           </el-form-item>
-          <el-form-item  :label="data.mbConfig.title" label-width="110px">
-            <el-slider v-model="data.mbConfig.val" show-input />
+          <el-form-item  :label="formData.mbConfig.title" label-width="110px">
+            <el-slider v-model="formData.mbConfig.val" show-input />
           </el-form-item>
         </el-tab-pane>
       </el-form>
@@ -97,7 +97,6 @@
 import {ref, reactive, toRefs, onMounted} from "vue";
 import draggable from "vuedraggable";
 import { ElMessage } from 'element-plus'
-import { Plus } from '@element-plus/icons-vue'
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import type { UploadProps } from 'element-plus'
     export default {
@@ -111,9 +110,10 @@ import type { UploadProps } from 'element-plus'
           color1:'#409EFF',
           activeName:'content',
           dynamicValidateForm:{},
-          data: props.formData,
           locale:zhCn
         })
+
+        const {formData} = toRefs(props)
 
         const imageUrl = ref('')
 
@@ -140,7 +140,7 @@ import type { UploadProps } from 'element-plus'
         }
 
         const addInfo = () =>{
-          state.data.list.push({
+          formData.list.push({
             img: "",
             info: [
               {
@@ -172,6 +172,7 @@ import type { UploadProps } from 'element-plus'
 
         return {
           imageUrl,
+          formData,
           addInfo,
           handleAvatarSuccess,
           beforeAvatarUpload,

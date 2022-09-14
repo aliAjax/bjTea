@@ -83,7 +83,6 @@ import diyDefaultData from '@/ulits/diyData/index'
       }
 
       const cloneDog = (data) => {
-        // this.mConfig.push(tempItem)
         return {
           ...data,
         };
@@ -95,8 +94,8 @@ import diyDefaultData from '@/ulits/diyData/index'
         const tmp = JSON.parse(JSON.stringify(state.diyDefaultData[el.name]))
         tmp.id=id
         emit('addDom', tmp)
-        bus.emit('addDom', tmp)
-        bus.emit('chooseComponents', tmp)
+        // bus.emit('addDom', tmp)
+        // bus.emit('chooseComponents', tmp)
       }
 
       onMounted(()=>{

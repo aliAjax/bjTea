@@ -2,16 +2,15 @@
   <div class="diyOperation">
     <div class="title">
       <diyDivider />
-      <div class="title-name">{{data.cnName}}</div>
+      <div class="title-name">{{operationData.cnName}}</div>
     </div>
-    <component :is="data.name" :formData="data"/>
+    <component :is="operationData.name" :formData="operationData"/>
   </div>
 </template>
 
 <script lang="ts">
 
-import {onMounted, reactive, toRefs} from "vue";
-import bus from "@/ulits/bus";
+import {toRefs} from "vue";
 import diyDivider from "@/components/diy/diyDivider.vue"
 import diyModules from "@/components/diyOperationComponents/index.ts"
 
@@ -21,20 +20,11 @@ export default {
     diyDivider,
     ...diyModules
   },
-  setup(){
-    const state = reactive({
-      data:{
-      }
-    })
-
-    onMounted(()=>{
-      bus.on('chooseComponents', e => {
-        state.data = e
-      })
-    })
-
+  props:['operationData'],
+  setup(props){
+    const {operationData} = toRefs(props)
     return {
-      ...toRefs(state)
+      operationData
     }
   }
 }

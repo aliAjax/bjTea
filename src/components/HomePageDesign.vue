@@ -8,10 +8,10 @@
       </el-tabs>
     </div>
     <div class="diy-view">
-      <DiyView :viewData="formData.value" @changeView="changeView"/>
+      <DiyView :viewData="formData.value" :currentIndex="currentIndex" @changeIndex="changeIndex" @changeView="changeView"/>
     </div>
     <div class="diy-config">
-      <DiyOperation :operationData="formData.value[currentIndex]"/>
+      <DiyOperation :operationData="formData.value[currentIndex] || {cnName:'',name:''}"/>
     </div>
   </div>
 </template>
@@ -48,10 +48,15 @@
 
       const addDom = (el:any) =>{
         state.formData.value.push(el)
+        state.currentIndex = state.formData.value.length -1
       }
 
       const changeView = (el:any) =>{
         state.formData.value.push(el)
+      }
+
+      const changeIndex = (index:number) =>{
+          state.currentIndex = index
       }
 
       onMounted(()=>{
@@ -62,6 +67,7 @@
         handleClick,
         addDom,
         changeView,
+        changeIndex,
         ...toRefs(state)
       }
     }

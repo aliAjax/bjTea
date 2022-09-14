@@ -10,10 +10,10 @@
       <template #item="{ element,index }">
         <div class="list-group-item" :class="{'choose-item':currentIndex === index}" @click="chooseItem(element,index)">
           <div class="delete-box" v-if="index ===currentIndex">
-            <el-button class="icon-copy" @click="copyItem(index)">cp</el-button>
-            <el-button class="icon-del" @click="deleteItem(index)">dl</el-button>
-            <el-button class="icon-up" :disabled="index === 0" @click="moveOp(index,-1)">up</el-button>
-            <el-button class="icon-down" :disabled="index === mConfig.length-1" @click="moveOp(index,1)">dw</el-button>
+            <el-button class="icon-copy" @click.stop="copyItem(index)">cp</el-button>
+            <el-button class="icon-del" @click.stop="deleteItem(index)">dl</el-button>
+            <el-button class="icon-up" :disabled="index === 0" @click.stop="moveOp(index,-1)">up</el-button>
+            <el-button class="icon-down" :disabled="index === mConfig.length-1" @click.stop="moveOp(index,1)">dw</el-button>
           </div>
           {{ element.cnName }}
         </div>
@@ -24,20 +24,20 @@
 <script lang="ts">
 
 import draggable from "vuedraggable";
-import bus from "@/ulits/bus.ts"
-import {onMounted, reactive, toRefs} from "vue";
+import {reactive, toRefs} from "vue";
 
 export default {
   name:'DiyView',
   components:{
     draggable
   },
-  props:["viewData"],
+  props:["viewData","currentIndex"],
   setup(props,{emit}){
     const state = reactive({
-      mConfig:JSON.parse(JSON.stringify(props.viewData)),
-      currentIndex:0
+      mConfig:props.viewData,
     })
+
+    const {currentIndex} = toRefs(props)
 
     const change = () =>{
 
@@ -47,33 +47,26 @@ export default {
 
     }
 
-    const cbParent = () =>{
-      emit('changeView',JSON.parse(JSON.stringify(state.mConfig)))
-    }
-
     const copyItem = (index) =>{
       const copy = JSON.parse(JSON.stringify(state.mConfig[index]))
       state.mConfig.splice(index,0,copy)
-      cbParent()
     }
 
     const chooseItem = (el,index) =>{
-        state.currentIndex = index
-      bus.emit('chooseComponents', JSON.parse(JSON.stringify(el)))
+        emit('changeIndex',index)
     }
 
     const deleteItem = (index) =>{
       state.mConfig.splice(index,1)
       if(state.mConfig.length !== 0){
         if(state.mConfig[index]){
-          bus.emit('chooseComponents', JSON.parse(JSON.stringify(state.mConfig[index])))
+          emit('changeIndex',index)
         }else{
-          bus.emit('chooseComponents', JSON.parse(JSON.stringify(state.mConfig[index-1])))
+          emit('changeIndex',index-1)
         }
       }else{
-        bus.emit('chooseComponents', null)
+        emit('changeIndex',index)
       }
-      cbParent()
     }
 
     const moveOp = (index,type) =>{
@@ -81,20 +74,12 @@ export default {
       const item = mConfig.splice(index,1)
       mConfig.splice(index+type,0,item[0])
       state.mConfig = mConfig
-      state.currentIndex += type
-      cbParent()
+      emit('changeIndex',index+type)
     }
 
     const log = (evt) => {
-      state.currentIndex = evt.moved.newIndex
+      emit('changeIndex',evt.moved.newIndex)
     }
-
-    onMounted(()=>{
-      bus.on('addDom', e => {
-        state.currentIndex = state.mConfig.length
-        state.mConfig.push(e)
-      })
-    })
 
     return {
       change,
@@ -104,6 +89,7 @@ export default {
       deleteItem,
       moveOp,
       log,
+      currentIndex,
       ...toRefs(state)
     }
   }
