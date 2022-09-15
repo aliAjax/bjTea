@@ -28,7 +28,6 @@
 <script lang="ts">
 import {reactive, toRefs,onMounted} from "vue";
 import draggable from "vuedraggable";
-import bus from '@/ulits/bus.ts'
 import diyDefaultData from '@/ulits/diyData/index'
   export default {
     name:'DiyComponents',

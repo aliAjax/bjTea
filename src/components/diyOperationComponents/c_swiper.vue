@@ -65,7 +65,7 @@
           <el-form-item  :label="formData.imgConfig.title" label-width="110px">
             <img @click="changeImgConfig(0)" src="@/assets/diy/c_swiper/fillet.png" alt="fillet" style="width: 24px;margin-right: 8px;cursor: pointer">
             <img @click="changeImgConfig(1)" src="@/assets/diy/c_swiper/right_angle.png" alt="right_angle" style="width: 24px;cursor: pointer;margin-right: 28px;">
-            <span style="color:#333333">{{formData.imgConfig.type===0?'圆角':'直角'}}</span>
+            <span style="color:#333333">{{formData.imgConfig.type===1?'圆角':'直角'}}</span>
           </el-form-item>
           <el-form-item  :label="formData.docConfig.title" label-width="110px">
             <el-radio-group v-model="formData.docConfig.type" class="ml-4">
@@ -98,7 +98,7 @@
 <script lang="ts">
 import {ref, reactive, toRefs, onMounted} from "vue";
 import draggable from "vuedraggable";
-import { ElMessage } from 'element-plus'
+import defaultSwiperData from "@/ulits/diyData/swiper"
 import zhCn from "element-plus/lib/locale/lang/zh-cn";
 import type { UploadProps } from 'element-plus'
     export default {
@@ -106,7 +106,14 @@ import type { UploadProps } from 'element-plus'
       components:{
         draggable
       },
-      props:['formData'],
+      props:{
+        formData:{
+          type:Object,
+          default:()=>{
+            return JSON.parse(JSON.stringify(defaultSwiperData))
+          }
+        }
+      },
       setup(props){
         const state = reactive({
           color1:'#409EFF',

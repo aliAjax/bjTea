@@ -15,7 +15,7 @@
             <el-button class="icon-up" :disabled="index === 0" @click.stop="moveOp(index,-1)">up</el-button>
             <el-button class="icon-down" :disabled="index === mConfig.length-1" @click.stop="moveOp(index,1)">dw</el-button>
           </div>
-          {{ element.cnName }}
+          <component :is="element.name" :viewData="mConfig[index]"/>
         </div>
       </template>
     </draggable>
@@ -25,11 +25,13 @@
 
 import draggable from "vuedraggable";
 import {reactive, toRefs} from "vue";
+import diyViewModules from "@/components/diyView/index"
 
 export default {
   name:'DiyView',
   components:{
-    draggable
+    draggable,
+    ...diyViewModules
   },
   props:["viewData","currentIndex"],
   setup(props,{emit}){
@@ -108,7 +110,7 @@ export default {
       position: relative;
       background: #f0f2f5;
       margin-bottom: 2px;
-      padding: 0 10px 10px;
+      //padding: 0 10px 10px;
       cursor: move;
       .delete-box{
         position: absolute;

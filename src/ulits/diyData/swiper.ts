@@ -73,7 +73,7 @@ const defaultSwiperData = {
     },
     lrConfig: {
         title: "图片高度：",
-        val: 0,
+        val: 50,
         min: 0,
         max:100
     },
